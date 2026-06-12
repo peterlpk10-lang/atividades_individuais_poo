@@ -3,7 +3,9 @@ class Onibus:
         self.placa = placa
         self.nome_motorista = nome_motorista
         self.num_assentos = num_assentos
-        self.assentos = [True, False]
+        self.assentos = []
+        for i in range(num_assentos):
+            self.assentos.append(False)
 
     def __len__(self):
         return len(self.assentos)
@@ -18,21 +20,20 @@ class Onibus:
         if not isinstance(valor, bool):
             raise TypeError(f"Valor deve ser booleano (True/False)")
         if 0 > indice or indice >= (len(self.assentos)):
-            raise IndexError(f"Escolha um valor entre 0 e {len(self.assentos)}")
-        else:
-            self.assentos[indice] = valor
+            raise IndexError(f"Escolha um valor entre 0 e {len(self.assentos) -1}")
+        self.assentos[indice] = valor
 
     def __str__(self):
         ocupados = []
         for i in self.assentos:
-            if i == False:
+            if i == True:
                 ocupados.append(i)
         return f'''Ônibus (Placa: {self.placa}) - Motorista: {self.nome_motorista}
-        Assentos totais: {self.num_assentos}
-        Assentos ocupados: {len(ocupados)}'''
-obj = Onibus("adjfashkjd", "marcio", 30)
-tungh = 1
-a = obj[tungh]
-print(a)
-print(obj)
+Assentos totais: {self.num_assentos}
+Assentos ocupados: {len(ocupados)}
+Assentos livres: {self.num_assentos-len(ocupados)}'''
 
+onibus = Onibus("ABC-1234", "João Silva", 10) # Ônibus com 10 assentos
+print(len(onibus)) # Verificando total de assentos 
+onibus[0] = True # Ocupando o primeiro assento (índice 0) 
+print(onibus)
