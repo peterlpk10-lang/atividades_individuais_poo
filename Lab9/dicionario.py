@@ -49,8 +49,12 @@ print(resultado)
 # questao 03
 
 def mesclar_dicionarios(d1, d2):
-    for i in range(len(d1.keys())):
-        
+    lista = []
+    for chave, valor in d1.items():
+        if d1[chave] == d2[chave]:
+            lista.append()
+            if d1[valor] > d2[valor]:
+                lista.append() 
             
     
 dicionario1 = {'a': 1, 'b': 2, 'c': 3}
