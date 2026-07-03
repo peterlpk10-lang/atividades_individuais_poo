@@ -82,11 +82,15 @@ print(resultado)
 # questao 05
 
 def resultado_votacao(votos):
-    novo_dic = []
-    for i in votos:
-        for chave, valor in i.items():
-            novo_dic.append(chave) 
-    return dict(novo_dic)
+    novo_dic = {}
+    for voto in votos:
+        for chave, valor in voto.items():
+            if chave in novo_dic:
+                novo_dic[chave] += valor
+            else:
+                novo_dic[chave] = valor
+        total = sum(novo_dic.values())
+    return total
 
 votos = [
     {'candidato_A': 120, 'candidato_B': 85, 'candidato_C': 90},
