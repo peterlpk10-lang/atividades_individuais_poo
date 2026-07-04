@@ -9,42 +9,29 @@ resultado = contagem_caracteres(frase)
 print(resultado)
 
 # questao 02
-#arquivo = open('C:/Users/Admin/OneDrive/Documentos/GitHub/atividades_individuais_poo/Lab9/estomago.txt', 'r', encoding='utf-8')   
-#texto = arquivo.read()
-#alfabeto = {
-#    'a': 1,
-#    'b': 2,
-#    'c': 3,
-#    'd': 4, 
-#    'e': 5,
-#    'f': 6,
-#    'g': 7,
-#    'h': 8,
-#    'i': 9,
-#    'j': 10,
-#    'k': 11,
-#    'l': 12,
-#    'm': 13,
-#    'n': 14,
-#    'o': 15,
-#    'p': 16,
-#    'q': 17,
-#    'r': 18,
-#    's': 19,
-#    't': 20,
-#    'u': 21,
-#    'v': 22,
-#    'w': 23,
-#    'x': 24,
-#    'y': 25,
-#    'z': 26
-#}
-#quant = {}
-#for i in alfabeto:
-#    quant[i] = texto.count(i)
+arquivo = open('C:/Users/Admin/OneDrive/Documentos/GitHub/atividades_individuais_poo/Lab9/estomago.txt', 'r', encoding='utf-8')   
+texto = arquivo.read()
+arquivo.close()
+texto = texto.replace(".", " ")
+texto = texto.replace(",", " ")
+texto = texto.replace("\n", " ")
 
-#sorted(quant.values(), reverse=True)
-#print(quant)
+palavras = texto.split()
+
+quant_palavras = {}
+
+for palavra in palavras:
+    if palavra in quant_palavras:
+        quant_palavras[palavra] += 1
+    else:
+        quant_palavras[palavra] = 1
+
+def pega_valor(item):
+    return item[1]
+
+quant = dict(sorted(quant_palavras.items(), key = pega_valor, reverse=True))
+
+print(quant)
 
 # questao 03
 
@@ -89,8 +76,11 @@ def resultado_votacao(votos):
                 novo_dic[chave] += valor
             else:
                 novo_dic[chave] = valor
-        total = sum(novo_dic.values())
-    return total
+    total = sum(novo_dic.values())
+    for chave, valor in novo_dic.items():
+        media = round((valor / total) * 100, 2)
+        novo_dic[chave] = (valor, media)
+    return novo_dic
 
 votos = [
     {'candidato_A': 120, 'candidato_B': 85, 'candidato_C': 90},
@@ -98,5 +88,4 @@ votos = [
     {'candidato_A': 130, 'candidato_B': 78, 'candidato_C': 105},
 ]
 resultado = resultado_votacao(votos)
-print(resultado)  # Saída esperada: {'candidato_A': (360, 40.31), 'candidato_B': (258, 28.89), 
-                                ###  'candidato_C': (275, 30.79)}
+print(resultado)
